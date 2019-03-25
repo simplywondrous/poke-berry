@@ -1,9 +1,30 @@
 import React from "react";
 
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
 /** All info of item */
+// TODO - getting pretty confused how to make generic modal and info classes, and how data should be passed in between and who should render what for a modal
+// Just gonna do specific stuff for now
 class ItemInfo extends React.Component {
+  state = {
+    berry: this.props.item
+  };
+
   render() {
-    return <div>All Item Info</div>;
+    const { berry } = this.state.berry;
+    // TODO why is it berry.berry :(
+    //console.log(berry.berry);
+    return (
+      <div>
+        <DialogTitle>{berry.name}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>This is {berry.name} text.</DialogContentText>
+        </DialogContent>
+      </div>
+    );
   }
 }
 

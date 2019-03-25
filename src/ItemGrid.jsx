@@ -1,7 +1,12 @@
 import React from "react";
 import axios from "axios";
 
+import Grid from "@material-ui/core/Grid";
+
 import ItemCard from "./ItemCard";
+
+// TODO - figure out how this works
+const styles = theme => ({});
 
 /** A Grid of ItemCards -
  *  Queries for all berries - ignoring gen. for now
@@ -19,7 +24,7 @@ class ItemGrid extends React.Component {
   state = localStorage.getItem("cachedState")
     ? JSON.parse(localStorage.getItem("cachedState"))
     : {
-        itemList: []
+        berry_dex: []
       };
 
   async componentDidMount() {
@@ -31,6 +36,7 @@ class ItemGrid extends React.Component {
     const berry_response = await instance.get(BERRY_QUERY + GET_ALL);
     const berry_list = berry_response.data.results;
 
+    // TODO - why is async in front of berry_obj
     const promises = berry_list.map(async berry_obj => {
       let berry = {};
       berry.name = berry_obj.name;
@@ -49,7 +55,7 @@ class ItemGrid extends React.Component {
       } = berry_id_obj;
       berry.berry_id = berry_id;
       berry.firmness = firmness.name;
-      // This is assuming it follows the order spicy, dry, sweet, bitter, sour
+      // Follows the order spicy, dry, sweet, bitter, sour
       berry.flavors = flavors.map(flavor => {
         return flavor.potency;
       });
@@ -74,25 +80,36 @@ class ItemGrid extends React.Component {
       berry.flavor_texts = flavor_text.filter(item => {
         return item.language.name === "en";
       });
-      berry.sprite = sprites.default;
+      berry.image_src = sprites.default;
 
       return berry;
     });
     const berry_dex = await Promise.all(promises);
 
-    console.log(berry_dex);
-    // this.setState({
-    //   itemList: response.data.results
-    // });
+    // console.log(berry_dex);
+    this.setState({
+      berry_dex: berry_dex
+    });
   }
 
   render() {
-    const { itemList } = this.state;
-    const itemCardList = itemList.map(item => {
-      return <ItemCard key={item.name} name={item.name} url={item.url} />;
+    const { berry_dex } = this.state;
+    const gridItemList = berry_dex.map(berry => {
+      // TODO - what is Grid xs
+      return (
+        <Grid item xs={3} key={berry.name}>
+          <ItemCard berry={berry} handleClick={this.props.handleClick} />
+        </Grid>
+      );
     });
-    // return <div>{itemCardList}</div>;
-    return null;
+
+    return (
+      <div>
+        <Grid container spacing={16} direction="row" wrap="wrap">
+          {gridItemList}
+        </Grid>
+      </div>
+    );
   }
 }
 
@@ -100,5 +117,5 @@ export default ItemGrid;
 
 /**Styling:
  *  Background - gray
- *  Wrap-around, columns, dynamic
+ *  Wrap-around, columns, responsive
  */
