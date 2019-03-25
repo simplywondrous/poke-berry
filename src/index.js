@@ -13,7 +13,6 @@ class App extends React.Component {
   };
 
   showModal = berry => {
-    console.log("Here");
     this.setState({ modalBerry: { berry } });
   };
 

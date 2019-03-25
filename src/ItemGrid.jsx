@@ -56,8 +56,10 @@ class ItemGrid extends React.Component {
       berry.berry_id = berry_id;
       berry.firmness = firmness.name;
       // Follows the order spicy, dry, sweet, bitter, sour
-      berry.flavors = flavors.map(flavor => {
-        return flavor.potency;
+      // Formatted for easy use with react-vis
+      berry.flavors = {};
+      flavors.map(item => {
+        berry.flavors[item.flavor.name] = item.potency;
       });
       berry.growth_time = growth_time;
       berry.max_harvest = max_harvest;
