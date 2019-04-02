@@ -8,6 +8,7 @@ import { RadarChart, XAxis, YAxis } from "react-vis";
 // Graphs only non-zero values to make shape, following Gen IV graph style
 
 // TODO - Axes aren't showing for some reason, also text orientation
+// Also general styling to be like : https://serebii.net/berrydex-dp/19.png
 
 const BG_DISPLAY = [
   {
@@ -85,10 +86,10 @@ const FlavorGraph = props => {
     data: [...BG_DISPLAY, modData],
     domains: [
       { name: "Spicy", domain: [0, 50], getValue: d => d.spicy },
-      { name: "Dry", domain: [0, 50], getValue: d => d.dry },
-      { name: "Sweet", domain: [0, 50], getValue: d => d.sweet },
+      { name: "Sour", domain: [0, 50], getValue: d => d.sour },
       { name: "Bitter", domain: [0, 50], getValue: d => d.bitter },
-      { name: "Sour", domain: [0, 50], getValue: d => d.sour }
+      { name: "Sweet", domain: [0, 50], getValue: d => d.sweet },
+      { name: "Dry", domain: [0, 50], getValue: d => d.dry }
     ],
     height: 250,
     width: 250

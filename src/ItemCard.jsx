@@ -4,6 +4,28 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "120px",
+    height: "120px",
+    padding: "12px"
+  },
+  cardImage: {
+    margin: "10px 0px",
+    objectFit: "contain",
+    height: "50px"
+  },
+  cardContent: {
+    marginBottom: "10px",
+    color: "black"
+  }
+};
 
 /** Name and Pic, clicking leads to open ItemModal */
 class ItemCard extends React.Component {
@@ -11,21 +33,25 @@ class ItemCard extends React.Component {
     this.props.handleClick(this.props.berry);
   };
 
+  // TODO - override CardContent padding
+
   render() {
-    //console.log(this.props.berry.image_src);
+    const { classes } = this.props;
     return (
-      <Card className="card" onClick={this.handleClick}>
+      <Card className={classes.root} onClick={this.handleClick}>
         <CardMedia
-          className="card-image"
-          image={this.props.berry.image_src}
+          component="img"
+          className={classes.cardImage}
+          // image={this.props.berry.image_src}
+          image={`images/Dream_${this.props.berry.name}_Berry_Sprite.png`}
           title={this.props.berry.name}
         />
-        <CardContent>
-          <Typography component="h2">{this.props.berry.name}</Typography>
-        </CardContent>
+        <Typography variant="subtitle1" className={classes.cardContent}>
+          {this.props.berry.name}
+        </Typography>
       </Card>
     );
   }
 }
 
-export default ItemCard;
+export default withStyles(styles)(ItemCard);

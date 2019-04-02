@@ -1,24 +1,35 @@
 import React from "react";
 import axios from "axios";
 
+import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import ItemCard from "./ItemCard";
 
-// TODO - figure out how this works
-const styles = theme => ({});
+const styles = theme => ({
+  rowNum: 4,
+  container: {
+    display: "grid",
+    gridTemplateColumns: "repeat( auto-fit, minmax(120px, 1fr) )",
+    gridAutoColumns: "auto",
+    gridGap: `${theme.spacing.unit}px`,
+    padding: `0px ${theme.spacing.unit * 4}px`,
+    justifyItems: "center",
+    marginTop: "120px"
+  }
+});
+
+// TODO - Make a service that does this instead
+let instance = axios.create({
+  baseURL: "https://pokeapi.co/api/v2/"
+});
+const BERRY_QUERY = "berry";
+const GET_ALL = "?limit=100";
 
 /** A Grid of ItemCards -
  *  Queries for all berries - ignoring gen. for now
  *  Children need stuff, so make own object with correct props to pass down
  */
-
-let instance = axios.create({
-  baseURL: "https://pokeapi.co/api/v2/"
-});
-const BERRY_QUERY = "berry";
-const ITEM_QUERY = "item";
-const GET_ALL = "?limit=100";
 
 class ItemGrid extends React.Component {
   state = localStorage.getItem("cachedState")
@@ -39,7 +50,8 @@ class ItemGrid extends React.Component {
     // TODO - why is async in front of berry_obj
     const promises = berry_list.map(async berry_obj => {
       let berry = {};
-      berry.name = berry_obj.name;
+      berry.name =
+        berry_obj.name.charAt(0).toUpperCase() + berry_obj.name.slice(1);
 
       const berry_id_response = await instance.get(berry_obj.url);
       const berry_id_obj = berry_id_response.data;
@@ -95,27 +107,42 @@ class ItemGrid extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     const { berry_dex } = this.state;
-    const gridItemList = berry_dex.map(berry => {
-      // TODO - what is Grid xs
+    const alphaList = berry_dex.sort((a, b) => {
+      if (a.name > b.name) {
+        return 1;
+      } else if (b.name > a.name) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    // console.log(alphaList);
+    const gridItemList = alphaList.map(berry => {
       return (
-        <Grid item xs={3} key={berry.name}>
+        <Grid item key={berry.name}>
           <ItemCard berry={berry} handleClick={this.props.handleClick} />
         </Grid>
       );
     });
 
     return (
-      <div>
-        <Grid container spacing={16} direction="row" wrap="wrap">
-          {gridItemList}
-        </Grid>
-      </div>
+      <Grid
+        container
+        className={classes.container}
+        spacing={16}
+        direction="row"
+        wrap="wrap"
+        justify="flex-start"
+      >
+        {gridItemList}
+      </Grid>
     );
   }
 }
 
-export default ItemGrid;
+export default withStyles(styles)(ItemGrid);
 
 /**Styling:
  *  Background - gray

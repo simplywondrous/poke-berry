@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Header from "./Header";
 import ItemGrid from "./ItemGrid";
@@ -25,15 +26,20 @@ class App extends React.Component {
     const { modalBerry } = this.state;
     return (
       <div>
-        <Header />
-        {modalBerry ? (
-          <ItemModal item={modalBerry} onClose={this.hideModal} />
-        ) : null}
-        <ItemGrid handleClick={this.showModal} />
+        <CssBaseline />
+        <div className="main">
+          <Header />
+          <div className="container">
+            {modalBerry ? (
+              <ItemModal item={modalBerry} onClose={this.hideModal} />
+            ) : null}
+            <ItemGrid handleClick={this.showModal} />
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<App className="App" />, rootElement);
