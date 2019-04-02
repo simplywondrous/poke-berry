@@ -11,11 +11,9 @@ const styles = theme => ({
   container: {
     display: "grid",
     gridTemplateColumns: "repeat( auto-fit, minmax(120px, 1fr) )",
-    gridAutoColumns: "auto",
-    gridGap: `${theme.spacing.unit}px`,
-    padding: `0px ${theme.spacing.unit * 4}px`,
-    justifyItems: "center",
-    marginTop: "120px"
+    gridGap: `${theme.spacing.unit * 1.5}px`,
+    padding: `${theme.spacing.unit * 4}px`,
+    justifyItems: "center"
   }
 });
 
@@ -118,7 +116,6 @@ class ItemGrid extends React.Component {
         return 0;
       }
     });
-    // console.log(alphaList);
     const gridItemList = alphaList.map(berry => {
       return (
         <Grid item key={berry.name}>
@@ -143,8 +140,3 @@ class ItemGrid extends React.Component {
 }
 
 export default withStyles(styles)(ItemGrid);
-
-/**Styling:
- *  Background - gray
- *  Wrap-around, columns, responsive
- */

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Header from "./Header";
+import Footer from "./Footer";
 import ItemGrid from "./ItemGrid";
 import ItemModal from "./ItemModal";
 
@@ -10,7 +11,9 @@ import "./styles.css";
 
 class App extends React.Component {
   state = {
-    modalBerry: ""
+    modalBerry: "",
+    poffinBerry: "",
+    footerExpanded: false
   };
 
   showModal = berry => {
@@ -21,9 +24,18 @@ class App extends React.Component {
     this.setState({ modalBerry: "" });
   };
 
-  // Show the modal here I think
+  selectBerry = berry => {
+    this.hideModal();
+    this.setState({ poffinBerry: { berry }, footerExpanded: true });
+  };
+
   render() {
-    const { modalBerry } = this.state;
+    const { modalBerry, poffinBerry, footerExpanded } = this.state;
+    let footerProps = { expanded: footerExpanded };
+    if (footerExpanded) {
+      footerProps["berry"] = poffinBerry;
+    }
+
     return (
       <div>
         <CssBaseline />
@@ -31,10 +43,15 @@ class App extends React.Component {
           <Header />
           <div className="container">
             {modalBerry ? (
-              <ItemModal item={modalBerry} onClose={this.hideModal} />
+              <ItemModal
+                item={modalBerry}
+                onClose={this.hideModal}
+                onBerrySelect={this.selectBerry}
+              />
             ) : null}
             <ItemGrid handleClick={this.showModal} />
           </div>
+          <Footer {...footerProps} />
         </div>
       </div>
     );

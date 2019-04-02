@@ -22,7 +22,11 @@ class ItemModal extends React.Component {
   render() {
     return (
       <Dialog open={this.state.open} onClose={this.handleClose}>
-        <ItemInfo item={this.props.item} onClose={this.handleClose} />
+        <ItemInfo
+          item={this.props.item}
+          onClose={this.handleClose}
+          onBerrySelect={this.props.onBerrySelect}
+        />
       </Dialog>
     );
   }

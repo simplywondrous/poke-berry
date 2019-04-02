@@ -11,28 +11,7 @@ import FlavorGraph from "./FlavorGraph";
 import TestChart from "./TestChart";
 
 import { withStyles } from "@material-ui/core/styles";
-import MuiDialogTitle from "@material-ui/core/DialogTitle";
-import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-
-// const DialogTitle = withStyles(theme => ({
-//   closeButton: {
-//     position: "absolute"
-//   }
-// }))(props => {
-//   const { children, classes, onClose } = props;
-//   return (
-//     <MuiDialogTitle disableTypography>
-//       <Typography variant="h6">{children}</Typography>
-//       {onClose ? (
-//         <IconButton className={classes.closeButton} onClick={onClose}>
-//           <CloseIcon />
-//         </IconButton>
-//       ) : null}
-//     </MuiDialogTitle>
-//   );
-// });
 
 /** All info of item */
 // TODO - getting pretty confused how to make generic modal and info classes, and how data should be passed in between and who should render what for a modal
@@ -42,10 +21,14 @@ class ItemInfo extends React.Component {
     berry: this.props.item
   };
 
+  handleSelect = event => {
+    this.props.onBerrySelect(this.state.berry.berry);
+  };
+
   render() {
     const { berry } = this.state.berry;
     // TODO why is it berry.berry :(
-    console.log(berry.flavor_texts);
+    // console.log(berry.flavor_texts);
     return (
       <div>
         <DialogActions>
@@ -66,6 +49,12 @@ class ItemInfo extends React.Component {
           <FlavorGraph data={berry.flavors} />
           {/* <TestChart /> */}
         </DialogContent>
+
+        <DialogActions>
+          <Button variant="contained" onClick={this.handleSelect}>
+            Let's Make Poffin!
+          </Button>
+        </DialogActions>
       </div>
     );
   }

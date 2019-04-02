@@ -1,0 +1,43 @@
+
+THOUGHTS:
+Okay after using this library for this project, I've come to realize opinionated libraries
+  can be difficult to work with if you have something specific in mind
+Going to finish this with the functionality I wanted to begin with, and for my next project,
+  will only use UI libraries when they do what I want / are explictly meant for customizing it the way I intend
+
+
+HEADER
+-Sticky Header
+-Replace Header file with one that repeats nicely
+-Add PokeBerry text to Header img
+
+GRID
+-Look into solution for drag / drop cards?
+-One day, make the grid actually stay square even when window resizes
+  (Currently, grid gaps are the same but width / height will change on resize)
+
+ITEM INFO
+-Lots to do (like everything)
+
+ITEM MODAL
+-Should this just go away? Still have to figure out class separation
+
+FOOTER
+-Where the frick is that extra space between the expand button and the actual content coming from?
+-Do I need the expansion to be controlled?
+-Text isn't centered
+-Shadow to distinguish footer from cards -> Overwriting MUI's classes seems difficult, might be better to write own
+
+SITE
+For a lot of these, probably better not to use an opinionated UI library, 
+  practice implementing on own first at least
+
+FUNCTION
+Turns out poffin making is not what I remembered and it's mostly based on how you stir and that's it,
+Not really about the combo of berries
+
+Poffin Guide - https://gamefaqs.gamespot.com/ds/925601-pokemon-diamond-version/faqs/48341
+
+https://bulbapedia.bulbagarden.net/wiki/Juice_Shoppe
+https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9block
+https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Dream_World_mini-games#Ice_Cream_Scoop
