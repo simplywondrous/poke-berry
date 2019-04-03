@@ -26,12 +26,24 @@ class App extends React.Component {
 
   selectBerry = berry => {
     this.hideModal();
-    this.setState({ poffinBerry: { berry }, footerExpanded: true });
+    this.setState({
+      poffinBerry: { berry },
+      footerExpanded: true
+    });
+  };
+
+  handleFooterClose = () => {
+    this.setState({
+      footerExpanded: false
+    });
   };
 
   render() {
     const { modalBerry, poffinBerry, footerExpanded } = this.state;
-    let footerProps = { expanded: footerExpanded };
+    let footerProps = {
+      expanded: footerExpanded,
+      onClose: this.handleFooterClose
+    };
     if (footerExpanded) {
       footerProps["berry"] = poffinBerry;
     }

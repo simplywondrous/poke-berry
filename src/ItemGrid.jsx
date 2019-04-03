@@ -88,7 +88,7 @@ class ItemGrid extends React.Component {
       } = berry_item_obj;
       berry.item_id = item_id;
       berry.cost = cost;
-      berry.effect = effects.short_effect;
+      berry.effect = effects[0].short_effect;
       berry.flavor_texts = flavor_text.filter(item => {
         return item.language.name === "en";
       });

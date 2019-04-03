@@ -3,6 +3,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import ItemCard from "./ItemCard";
+import FlavorGraph from "./FlavorGraph";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -30,7 +31,18 @@ class Footer extends React.Component {
   }
 
   handleClick = event => {
-    this.setState(prevState => ({ expanded: !prevState.expanded }));
+    this.setState(prevState => {
+      if (prevState.expanded) {
+        this.props.onClose();
+      }
+      return { expanded: !prevState.expanded };
+    });
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.expanded !== this.props.expanded) {
+      this.setState({ expanded: this.props.expanded });
+    }
   };
 
   render() {
@@ -49,7 +61,7 @@ class Footer extends React.Component {
           <ExpansionPanelDetails>
             <div className="footer-expanded">
               {expanded ? (
-                <ItemCard berry={berry.berry} handleClick={() => null} />
+                <FooterContent berry={berry.berry} />
               ) : (
                 <Typography variant="subtitle1">
                   No berry selected, click on a berry to select!
@@ -62,6 +74,28 @@ class Footer extends React.Component {
     );
   }
 }
+
+// Re-rendered upon close! Need a way to save
+const FooterContent = props => {
+  const { berry } = props;
+  return (
+    <span>
+      <ItemCard berry={berry} handleClick={() => null} />
+
+      <div
+        style={{
+          position: "absolute",
+          top: "-30px",
+          right: "0",
+          height: "50px"
+        }}
+      >
+        {/*  */}
+        <FlavorGraph data={berry.flavors} />
+      </div>
+    </span>
+  );
+};
 
 export default withStyles(styles)(Footer);
 

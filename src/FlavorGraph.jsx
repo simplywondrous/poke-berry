@@ -91,8 +91,8 @@ const FlavorGraph = props => {
       { name: "Sweet", domain: [0, 50], getValue: d => d.sweet },
       { name: "Dry", domain: [0, 50], getValue: d => d.dry }
     ],
-    height: 250,
-    width: 250
+    height: 300,
+    width: 300
   };
   return (
     <RadarChart

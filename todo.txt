@@ -7,11 +7,12 @@ Going to finish this with the functionality I wanted to begin with, and for my n
 
 
 HEADER
--Sticky Header
+-Two image files, scroll / no scroll, both same size
 -Replace Header file with one that repeats nicely
 -Add PokeBerry text to Header img
 
 GRID
+-On hover, show pointer-for-clicking mouse
 -Look into solution for drag / drop cards?
 -One day, make the grid actually stay square even when window resizes
   (Currently, grid gaps are the same but width / height will change on resize)
@@ -23,7 +24,9 @@ ITEM MODAL
 -Should this just go away? Still have to figure out class separation
 
 FOOTER
+-Persistent data! If another berry has not been picked, re-render should render last berry picked data
 -Where the frick is that extra space between the expand button and the actual content coming from?
+  > Seems to be something with min-height, and how the ^ arrow height counts
 -Do I need the expansion to be controlled?
 -Text isn't centered
 -Shadow to distinguish footer from cards -> Overwriting MUI's classes seems difficult, might be better to write own

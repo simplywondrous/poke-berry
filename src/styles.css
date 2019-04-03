@@ -22,15 +22,16 @@ body {
                   one smaller, scroll, grid items then do what they will I guess */
 
 .header-container {
-  position: relative;
+  position: sticky;
   height: 150px;
+  top: -75px;
 }
 
 .header-img {
   height: 100%;
   background-image: url("curtain.png");
   background-repeat: repeat-x;
-  background-size: auto 150px;
+  background-size: auto 100%;
 }
 
 .footer-container {
@@ -40,7 +41,17 @@ body {
 }
 
 .footer-expanded {
-  max-height: 100px;
+  max-height: 150px;
+  margin-bottom: 20px;
+}
+
+.item-info-table {
+  width: 100%;
+  text-align: left;
+}
+
+.item-info-table tr {
+  width: 100%;
 }
 
 .container {
@@ -51,5 +62,6 @@ body {
   justify-content: center;
   align-items: center;
 
-  margin: 1vh 10vw 10vh 10vw;
+  margin: -65px 10vw 10vh 10vw;
+  padding-top: 50px;
 }

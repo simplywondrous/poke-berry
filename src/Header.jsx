@@ -1,11 +1,12 @@
 import React from "react";
-const Header = () => {
-  return (
-    <div className="header-container">
-      <div className="header-img" />
-      {/* <img alt="banner" src="curtain.png" /> */}
-    </div>
-  );
-};
+class Header extends React.Component {
+  render() {
+    return (
+      <div className={"header-container"}>
+        <div className="header-img" />
+      </div>
+    );
+  }
+}
 
 export default Header;
